@@ -25,8 +25,6 @@ object TwirlPlugin extends Plugin {
 
   object Twirl extends TwirlKeys {
 
-<<<<<<< Updated upstream
-=======
     def twirlSrcDirectory(file: File, sv: String) = 
       new File(file.getAbsolutePath + "/twirl-" + sv)
   
@@ -34,7 +32,6 @@ object TwirlPlugin extends Plugin {
       new File(file.getAbsolutePath + "/generated-twirl-" + sv + "-sources")
     
 
->>>>>>> Stashed changes
     def settings: Seq[Def.Setting[Any]] = Seq(
       twirlTemplatesTypes := Map(
         "html" -> TemplateType("twirl.api.Html", "twirl.api.HtmlFormat"),
