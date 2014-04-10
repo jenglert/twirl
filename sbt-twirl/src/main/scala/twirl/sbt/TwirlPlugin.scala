@@ -19,12 +19,23 @@ import sbt._
 import Keys._
 
 import java.nio.charset.Charset
+import java.io.File
 
 object TwirlPlugin extends Plugin {
 
   object Twirl extends TwirlKeys {
 
-    def settings = Seq(
+<<<<<<< Updated upstream
+=======
+    def twirlSrcDirectory(file: File, sv: String) = 
+      new File(file.getAbsolutePath + "/twirl-" + sv)
+  
+    def twirlGenDirectory(file: File, sv: String) = 
+      new File(file.getAbsolutePath + "/generated-twirl-" + sv + "-sources")
+    
+
+>>>>>>> Stashed changes
+    def settings: Seq[Def.Setting[Any]] = Seq(
       twirlTemplatesTypes := Map(
         "html" -> TemplateType("twirl.api.Html", "twirl.api.HtmlFormat"),
         "txt"  -> TemplateType("twirl.api.Txt", "twirl.api.TxtFormat"),
@@ -33,9 +44,9 @@ object TwirlPlugin extends Plugin {
 
       twirlImports in Global := Nil,
 
-      sourceDirectory in twirlCompile <<= (sourceDirectory in Compile) / "twirl",
-
-      target in twirlCompile <<= (sourceManaged in Compile) / "generated-twirl-sources",
+      sourceDirectory in twirlCompile <<= (sourceDirectory in Compile, scalaVersion) apply twirlSrcDirectory,
+      
+      target in twirlCompile <<= (sourceManaged in Compile, scalaVersion) apply twirlGenDirectory,
 
       twirlSourceCharset := Charset.forName("UTF8"),
 
